@@ -1,5 +1,10 @@
 # FILENAME...	makeIocCdCommands.pl
 #
+# USAGE... This is a modified version of Janet Anderson's
+#          makeIocCdCommands.pl file. It is modified to support "include"
+#          directives and various macros; i.e., SUPPORT, GATEWAY,
+#          EPICS_IOC_STARTUP.
+#
 # ORIGINAL AUTHOR: Janet Anderson
 # CURRENT AUTHOR: Ron Sluiter
 # 
@@ -12,6 +17,13 @@
 #	can be used in network environments where the path reported by the
 #	cwd() command is not that same as that needed in the cdCommands file.
 #
+# MODIFICATION LOG...
+# 03/24/04 rls Support for GATEWAY environment variable.
+#
+#Version:	$Revision: 1.4.2.2 $
+#Modified By:	$Author: sluiter $
+#Last Modified:	$Date: 2004-03-24 23:13:59 $
+
 eval 'exec perl -S $0 ${1+"$@"}'  # -*- Mode: perl -*-
     if $running_under_some_shell; # makeIocCdCommands.pl
 
@@ -23,6 +35,12 @@ if ($ENV{EPICS_IOC_STARTUP} ne "")
 {
     $cwd = $ENV{EPICS_IOC_STARTUP};
 }
+if ($ENV{GATEWAY} ne "")
+{
+    # Add GATEWAY to macro list.
+    $applications{GATEWAY} = $ENV{GATEWAY};
+}
+
 $arch = $ARGV[0];
 
 unlink("cdCommands");
