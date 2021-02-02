@@ -1,4 +1,9 @@
-# utils
+# Currently Deprecated
+
+### This is an old version of this support. All history has been merged into the EPICS-synApps/support repo (https://github.com/EPICS-synApps/support) as of Feb 2, 2021.
+
+
+## utils
 APS BCDA synApps module: utils
 
 For more information, see
